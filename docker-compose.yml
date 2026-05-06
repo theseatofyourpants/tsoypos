@@ -1,0 +1,23 @@
+services:
+  tsoypos:
+    build: .
+    container_name: tsoypos
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD in .env}
+      # Only set to "true" if you access the site via HTTPS (reverse proxy,
+      # Cloudflare Tunnel, etc.). Leave false for direct LAN http:// access.
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      # SESSION_SECRET is optional; auto-generated and persisted to data/ if unset.
+      SESSION_SECRET: ${SESSION_SECRET:-}
+    volumes:
+      - ./data:/app/data
+      # Bind-mount the source code so edits on the host take effect without
+      # rebuilding the image. Restart the container to pick up server.js edits;
+      # public/ changes only need a browser refresh.
+      - ./server.js:/app/server.js:ro
+      - ./public:/app/public:ro

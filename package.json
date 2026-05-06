@@ -1,0 +1,27 @@
+{
+  "name": "tsoypos",
+  "version": "1.0.0",
+  "description": "A retro terminal-themed personal homepage with a built-in admin customize panel. Self-hosted, single-user, single Docker container.",
+  "private": true,
+  "license": "MIT",
+  "author": "<YOUR NAME OR HANDLE>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/<YOUR-USERNAME>/tsoypos"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "helmet": "^8.0.0",
+    "sanitize-html": "^2.13.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
