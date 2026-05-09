@@ -241,6 +241,9 @@ If you want to change the *project name* itself (e.g. you're forking and want to
 grep -rln -E "tsoypos|tsoypOS" . --include="*.js" --include="*.json" --include="*.md" --include="*.html" --include="*.yml" --include="Dockerfile"
 ```
 
+## Acknowledgements
+This project was developed in collaboration with Claude (Anthropic). The architecture, security model, and deployment decisions are mine; Claude assisted with code generation, which I reviewed, tested, and iterated on. The project includes a documented threat model in SECURITY.md and was pentested before public release.
+
 ## Contributing
 
 Issues and pull requests welcome. The codebase is small enough (~1500 LOC) that you can read it end-to-end in an hour. Conventions:
