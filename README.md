@@ -29,7 +29,7 @@ Inspired by [hedge.edgeofhedge.com](https://hedge.edgeofhedge.com).
 ## Quick start (Docker Compose, recommended)
 
 ```bash
-git clone https://github.com/<your-username>/tsoypos.git
+git clone https://github.com/theseatofyourpants/tsoypos.git
 cd tsoypos
 cp .env.example .env
 # Edit .env and set a strong ADMIN_PASSWORD
@@ -43,7 +43,7 @@ State lives in `./data/` — back that one folder up and you've backed up everyt
 ## Quick start (plain Node, no Docker)
 
 ```bash
-git clone https://github.com/<your-username>/tsoypos.git
+git clone https://github.com/theseatofyourpants/tsoypos.git
 cd tsoypos
 npm install
 ADMIN_PASSWORD='your-strong-password' node server.js

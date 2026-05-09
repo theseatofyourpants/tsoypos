@@ -4,7 +4,7 @@
   "description": "A retro terminal-themed personal homepage with a built-in admin customize panel. Self-hosted, single-user, single Docker container.",
   "private": true,
   "license": "MIT",
-  "author": "Pants @theseatofyourpants",
+  "author": "pants <@theseatofyourpants>",
   "repository": {
     "type": "git",
     "url": "https://github.com/theseatofyourpants/tsoypos"
