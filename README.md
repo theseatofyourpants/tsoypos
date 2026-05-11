@@ -18,6 +18,14 @@ Inspired by [hedge.edgeofhedge.com](https://hedge.edgeofhedge.com).
 - **Session auth** via signed httpOnly cookie. No third-party auth integration to wire up.
 - **Working terminal** with command history, theme switching, navigation, and a few easter eggs.
 
+
+<img width="1072" height="717" alt="main" src="https://github.com/user-attachments/assets/19bbfafc-265f-42e4-aeef-772c75d6e745" />
+
+| | | |
+|---|---|---|
+| <img width="316" alt="content" src="https://github.com/user-attachments/assets/cac0e97c-f9b0-4e58-8062-4a43451fe343" /> | <img width="315" alt="theme" src="https://github.com/user-attachments/assets/55788284-4795-498b-99d7-bb5162cfe379" /> | <img width="316" height="706" alt="identity" src="https://github.com/user-attachments/assets/80f2fb5e-9f13-4849-aea6-6969a77547d9" /> |
+| Content tab | Theme tab | Identity Tab |
+
 ## Stack
 
 - **Backend**: Node.js 20+, Express, `express-session`, `helmet`, `sanitize-html`. Four runtime dependencies, none of which require native compilation.
