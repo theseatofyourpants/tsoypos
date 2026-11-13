@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# runtime state (settings, guestbook, session secret)
+data/
+
+# secrets
+.env
+
+# logs / OS cruft
+npm-debug.log*
+.DS_Store
