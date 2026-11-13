@@ -150,12 +150,14 @@ const THEMES = {
     accent: "#f9f871", accent2: "#ff00a8", danger: "#ff3860",
     chrome: "#0c0d24",
   },
-  paperwhite: {
-    label: "Paperwhite",
-    bg: "#ecebe4", surface: "#ffffff", surfaceAlt: "#f4f3ea",
-    border: "#c9c6b4", text: "#1b1b1a", muted: "#6b6a5f",
-    accent: "#d23b2c", accent2: "#1e5bb8", danger: "#a8281d",
-    chrome: "#e3e1d3",
+  // Brand palette: Deep Navy #0B276B (bg), Electric Cyan #24D6FF (accent),
+  // Pure White (text), Pure Black (terminal). Other slots are tints of those.
+  tsoyp: {
+    label: "TSOYP",
+    bg: "#0b276b", surface: "#0f2f7a", surfaceAlt: "#143a8c",
+    border: "#2a56b3", text: "#ffffff", muted: "#8fa9dc",
+    accent: "#24d6ff", accent2: "#9beaff", danger: "#ff4d6d",
+    chrome: "#071c50",
   },
 };
 
