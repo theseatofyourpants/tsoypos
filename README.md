@@ -9,7 +9,7 @@ Inspired by [hedge.edgeofhedge.com](https://hedge.edgeofhedge.com).
 - **Public site** with a bookmarks-style nav (Home / Projects / Certifications / Links), a profile card, an interactive shell-like terminal, and a guestbook.
 - **Admin login** gated by a single password set via env var. Only the admin sees the customize panel.
 - **Live customize drawer** with four tabs:
-  - **Theme** — six built-in presets (Matrix, Amber CRT, Synthwave, Dracula, Cyberpunk, TSOYP) plus per-slot color pickers for full custom palettes.
+  - **Theme** — six built-in presets (Matrix, Amber CRT, Synthwave, Dracula, Cyberpunk, TSOYP) plus per-slot color pickers for full custom palettes. TSOYP follows the Seat of Your Pants brand guidelines: brand palette, Plus Jakarta Sans + Alexandria type, rounded cards and pill buttons.
   - **Identity** — OS name, display name, pronouns, username, hostname, path, prompt character, avatar URL, bio.
   - **Content** — add, edit, reorder, and delete projects, links, and certifications. Certifications support sections, in-progress vs. earned status, and within-section ordering.
   - **FX** — CRT scanlines, text glow, and film grain toggles.

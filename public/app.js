@@ -150,13 +150,17 @@ const THEMES = {
     accent: "#f9f871", accent2: "#ff00a8", danger: "#ff3860",
     chrome: "#0c0d24",
   },
-  // Brand palette: Deep Navy #0B276B (bg), Electric Cyan #24D6FF (accent),
-  // Pure White (text), Pure Black (terminal). Other slots are tints of those.
+  // Seat of Your Pants brand guidelines (2026).
+  //   Primary:   Deep Navy #0B276B (bg), Electric Cyan #24D6FF (accent)
+  //   Secondary: Deep Teal #087F8C (accent2), Tangerine Orange #FF6924 (danger)
+  //   Neutral:   Pure White (text), Pure Black (terminal)
+  // surface/border/muted/chrome are navy tints. Fonts + shapes live in the
+  // body[data-style="tsoyp"] block at the bottom of styles.css.
   tsoyp: {
     label: "TSOYP",
     bg: "#0b276b", surface: "#0f2f7a", surfaceAlt: "#143a8c",
-    border: "#2a56b3", text: "#ffffff", muted: "#8fa9dc",
-    accent: "#24d6ff", accent2: "#9beaff", danger: "#ff4d6d",
+    border: "#2a56b3", text: "#ffffff", muted: "#a3b8e6",
+    accent: "#24d6ff", accent2: "#087f8c", danger: "#ff6924",
     chrome: "#071c50",
   },
 };
@@ -207,6 +211,20 @@ function applyThemeToDOM(colors, effects) {
   r.style.setProperty("--chrome", colors.chrome);
   document.body.classList.toggle("fx-scanlines", !!effects.scanlines);
   document.body.classList.toggle("fx-grain", !!effects.grain);
+  // Typography/shape style. Defaults to the theme key for settings saved
+  // before styleKey existed; only presets with a CSS block change anything.
+  const s = state.settings || {};
+  document.body.dataset.style = s.styleKey || s.themeKey || "";
+}
+
+/* Switch to a built-in preset: palette + matching style. */
+function selectPreset(key) {
+  const { label, ...colors } = THEMES[key];
+  state.settings.themeKey = key;
+  state.settings.styleKey = key;
+  state.settings.colors = colors;
+  applyThemeToDOM(state.settings.colors, state.settings.effects);
+  scheduleSave();
 }
 
 /* Debounced settings save — called as admin tweaks controls. */
@@ -449,12 +467,14 @@ function renderSidebar() {
       ),
     ),
     el("div", { class: "win profile" },
-      el("img", {
+      // No avatar → render nothing. The listener (rather than an inline
+      // onerror attribute, which the CSP blocks) hides URLs that fail to load.
+      s.avatar ? el("img", {
         class: "avatar",
         src: s.avatar,
         alt: s.displayName,
-        onerror: "this.style.display='none'",
-      }),
+        onError: (e) => { e.target.style.display = "none"; },
+      }) : null,
       el("div", {
         class: "display display-name" + (state.settings.effects.glow ? " glow" : ""),
         text: s.displayName,
@@ -742,10 +762,7 @@ function renderTerminal() {
           break;
         }
         if (THEMES[args[0]]) {
-          state.settings.themeKey = args[0];
-          state.settings.colors = { ...THEMES[args[0]] };
-          applyThemeToDOM(state.settings.colors, state.settings.effects);
-          scheduleSave();
+          selectPreset(args[0]);
           print(`→ theme set to ${args[0]}`, "ok");
           setTimeout(render, 0);
         } else {
@@ -1074,10 +1091,7 @@ function renderTabTheme() {
         border: `1px solid ${isActive ? theme.accent : theme.border}`,
       },
       onClick: () => {
-        state.settings.themeKey = key;
-        state.settings.colors = { ...theme };
-        applyThemeToDOM(state.settings.colors, state.settings.effects);
-        scheduleSave();
+        selectPreset(key);
         render();
       },
     },
@@ -1105,6 +1119,8 @@ function renderTabTheme() {
     const sync = (v) => {
       if (!/^#[0-9a-fA-F]{6}$/.test(v)) return;
       state.settings.colors[key] = v;
+      // Keep the current preset's fonts/shape when hand-tuning colors.
+      if (!state.settings.styleKey) state.settings.styleKey = state.settings.themeKey;
       state.settings.themeKey = "custom";
       applyThemeToDOM(state.settings.colors, state.settings.effects);
       scheduleSave();
