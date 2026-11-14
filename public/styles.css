@@ -10,6 +10,12 @@
   --accent-2: #0fa958;
   --danger: #ff5577;
   --chrome: #0a1b12;
+
+  /* Typography + shape. Presets with their own style block (see the
+     bottom of this file) override these; everything else uses the defaults. */
+  --font-display: "VT323", "JetBrains Mono", monospace;
+  --font-body: "JetBrains Mono", "Courier New", monospace;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
 }
 
 * { box-sizing: border-box; }
@@ -19,7 +25,7 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "JetBrains Mono", "Courier New", monospace;
+  font-family: var(--font-body);
   min-height: 100vh;
 }
 
@@ -77,7 +83,7 @@ body.fx-grain::before {
 
 /* ---------------- typography ---------------- */
 .display {
-  font-family: "VT323", "JetBrains Mono", monospace;
+  font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
 
@@ -285,7 +291,7 @@ body.fx-grain::before {
 .term {
   background: #000;
   color: var(--accent);
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 13px;
   border: 1px solid var(--border);
   height: 260px;
@@ -368,7 +374,7 @@ body.fx-grain::before {
   font: inherit;
   font-size: 12px;
   outline: none;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
 }
 .text-input:focus { border-color: var(--accent); }
 textarea.text-input { resize: vertical; min-height: 56px; }
@@ -381,7 +387,7 @@ textarea.text-input { resize: vertical; min-height: 56px; }
   font-weight: 700;
   cursor: pointer;
   font: inherit;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-size: 11px;
@@ -396,7 +402,7 @@ textarea.text-input { resize: vertical; min-height: 56px; }
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
 }
 .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
 .btn-ghost.active { color: var(--accent); border-color: var(--accent); }
@@ -426,7 +432,7 @@ textarea.text-input { resize: vertical; min-height: 56px; }
   align-items: baseline;
   gap: 8px;
   margin: 0 0 12px;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 700;
   color: var(--text);
@@ -626,7 +632,7 @@ textarea.text-input { resize: vertical; min-height: 56px; }
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
 }
 .drawer-tabs button.active {
   color: var(--accent);
@@ -678,7 +684,7 @@ textarea.text-input { resize: vertical; min-height: 56px; }
   padding: 10px;
   cursor: pointer;
   font: inherit;
-  font-family: "JetBrains Mono", monospace;
+  font-family: var(--font-body);
   font-size: 12px;
   display: flex;
   flex-direction: column;
@@ -733,3 +739,100 @@ textarea.text-input { resize: vertical; min-height: 56px; }
 .mt-8 { margin-top: 8px; }
 .mt-16 { margin-top: 16px; }
 .mb-12 { margin-bottom: 12px; }
+
+/* =========================================================
+   TSOYP brand style — Seat of Your Pants brand guidelines.
+   Active when body[data-style="tsoyp"] (set by applyThemeToDOM).
+   Colors come from the palette slots, so custom color edits
+   still apply; this block only carries type and shape.
+
+   Guideline mapping:
+     Plus Jakarta Sans  → headings, titles, calls to action
+     Alexandria         → body copy, captions, labels
+     Tangerine Orange   → warnings (danger slot / in-progress)
+     Deep Teal          → supporting panels (accent 2 / earned)
+     Outline icons, rounded cards, pill CTAs, soft cyan glow.
+   ========================================================= */
+body[data-style="tsoyp"] {
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: "Alexandria", system-ui, sans-serif;
+  --radius: 10px;
+  /* Soft cyan bloom top-right, echoing the brand banners' gradient. */
+  background:
+    radial-gradient(900px 500px at 100% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+body[data-style="tsoyp"] .display {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+body[data-style="tsoyp"] .card-heading { border-bottom-style: solid; }
+body[data-style="tsoyp"] .card-heading .prompt { font-size: 26px; }
+body[data-style="tsoyp"] .display-name { font-size: 22px; margin-top: 4px; }
+body[data-style="tsoyp"] .cert-shorthand { font-size: 17px; }
+body[data-style="tsoyp"] .cert-section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  border-bottom-style: solid;
+}
+body[data-style="tsoyp"] .proj-card .name { font-family: var(--font-display); }
+body[data-style="tsoyp"] .topbar .title { font-family: var(--font-display); font-weight: 800; }
+
+/* Rounded surfaces */
+body[data-style="tsoyp"] :is(.win, .term, .link-item, .cert-card, .guest-msg,
+  .text-input, .modal, .toast, .preset-btn, .toggle-row, .cert-edit-row,
+  .color-row input[type="color"]) {
+  border-radius: var(--radius);
+}
+body[data-style="tsoyp"] :is(.win, .term, .modal) { overflow: hidden; }
+body[data-style="tsoyp"] .guest-msg { border-left-width: 3px; }
+
+/* Pills + buttons: fully rounded, like the brand's CTA buttons */
+body[data-style="tsoyp"] :is(.pill, .btn-primary, .btn-ghost, .guest-msg .delete-btn) {
+  border-radius: 999px;
+}
+body[data-style="tsoyp"] .pill { padding: 3px 10px; font-weight: 500; }
+body[data-style="tsoyp"] .btn-primary {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  padding: 10px 20px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+body[data-style="tsoyp"] .btn-primary:not(:disabled):hover {
+  box-shadow: 0 6px 20px -6px color-mix(in srgb, var(--accent) 70%, transparent);
+  transform: translateY(-1px);
+}
+
+/* Status pills as solid callouts — orange = warning, teal = supporting panel */
+body[data-style="tsoyp"] .pill.cert-progress {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--bg);
+}
+body[data-style="tsoyp"] .pill.cert-earned {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+  color: #ffffff;
+}
+
+/* Soft glow lift instead of the retro hard-offset shadow */
+body[data-style="tsoyp"] :is(.link-item, .cert-card):hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px var(--accent),
+    0 10px 28px -10px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Avatar: round, like the social profile badge; no pixel/grayscale treatment */
+body[data-style="tsoyp"] .avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  filter: none;
+  image-rendering: auto;
+}
